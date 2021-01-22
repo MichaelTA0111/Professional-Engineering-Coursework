@@ -168,6 +168,10 @@ dmypy.json
 *.out
 *.app
 
+# CMake files
+cmake-build-debug/
+CMakeLists.txt
+
 # Mbed compile files
 BUILD
 .mbed
