@@ -5,7 +5,7 @@ from sqlite3 import Error
 class DatabaseManager:
     """
     A class to manage an sqlite database.
-    Some code gotten from https://www.sqlitetutorial.net/
+    Some code used from https://www.sqlitetutorial.net/
     """
     def __init__(self, file_name):
         self.__file_name = file_name
