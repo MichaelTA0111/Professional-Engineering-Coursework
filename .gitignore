@@ -1,6 +1,9 @@
 # IntelliJ files
 .idea/
 
+# Database files
+*.db
+
 ######################################################## Python ########################################################
 
 # Byte-compiled / optimized / DLL files
