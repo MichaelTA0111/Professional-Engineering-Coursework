@@ -1,5 +1,6 @@
 from DatabaseManager import db_read
 from TimeConverter import TimeConverter as Tc
+from StatisticsManager import StatisticsManager as Sm
 
 
 dtu = Tc.date_to_unix
@@ -13,6 +14,12 @@ if __name__ == '__main__':
     headings = ['temperature',
                 'carbon_monoxide, nitric_oxide, nitrogen_dioxide, sulphur_dioxide',
                 'carbon_monoxide, sulphur_dioxide']
+    stats = []
 
     for i in range(3):
-        db_read(times[i], headings[i], plot_graph=True)
+        raw, time, data = db_read(times[i], headings[i], plot_graph=True)
+        stats.append([])
+        for j in range(len(data)):
+            stats[i].append(Sm(data[j], time))
+
+    stats[0][0].print_statistics()
