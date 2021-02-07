@@ -13,8 +13,11 @@ class DatabaseManager:
     A class to manage an sqlite database.
     Some code used from https://www.sqlitetutorial.net/
     """
-
     def __init__(self, file_name):
+        """
+        Constructor for the database manager class
+        :param file_name: The file path of the database to be queried
+        """
         self.__file_name = file_name
         self.__conn = self.__create_connection()
         self.__valid = self.__conn is not None
