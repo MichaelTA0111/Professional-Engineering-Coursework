@@ -13,7 +13,6 @@ class TimeConverter:
         :param date_str: The date as a string
         :return: The date as a unix timestamp
         """
-
         date = [int(date_str[6] + date_str[7] + date_str[8] + date_str[9]),
                 int(date_str[3] + date_str[4]),
                 int(date_str[0] + date_str[1])]
@@ -37,6 +36,16 @@ class TimeConverter:
         """
         date = dt.utcfromtimestamp(date_unix).strftime('%d/%m/%Y %H:%M:%S')
         date = dt.strptime(date, '%d/%m/%Y %H:%M:%S')
+        return date
+
+    @staticmethod
+    def unix_to_date_string(date_unix):
+        """
+        Function to convert time from a unix timestamp to the format DD/MM/YYYY HH:MM:SS
+        :param date_unix: The date as a unix timestamp
+        :return: The date as a string
+        """
+        date = dt.utcfromtimestamp(date_unix).strftime('%d/%m/%Y %H:%M:%S')
         return date
 
 
