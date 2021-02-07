@@ -5,7 +5,6 @@ class StatisticsManager:
     """
     Class to calculate all required statistics from the data given
     """
-
     def __init__(self, data, time):
         """
         Constructor for the statistics manager class
@@ -29,13 +28,14 @@ class StatisticsManager:
         Temporary method to print the statistics in a formatted way
         Will be replaced when the GUI is prepared
         """
-        print('Mean: ' + "{:.2f}".format(self.__mean))
-        print('Median: ' + "{:.2f}".format(self.__median))
         mode = ''
         for i in range(len(self.__mode)):
             if i != 0:
                 mode += ', '
             mode += "{:.2f}".format(self.__mode[i])
+
+        print('Mean: ' + "{:.2f}".format(self.__mean))
+        print('Median: ' + "{:.2f}".format(self.__median))
         print('Mode: ' + mode)
         print('Range: ' + "{:.2f}".format(self.__range))
         print('Interquartile Range: ' + "{:.2f}".format(self.__iqr))
@@ -130,6 +130,7 @@ class StatisticsManager:
         :param data: The data as an array
         :return: The range of the data
         """
+        # Subtract the maximum value from the minimum value
         data_range = sorted(data)[-1] - sorted(data)[0]
         return data_range
 
@@ -140,6 +141,7 @@ class StatisticsManager:
         :param data: The data as an array
         :return: The interquartile range of the data
         """
+        # Subtract the upper quartile from the lower quartile
         inter_quartile_range = quantiles(data)[2] - quantiles(data)[0]
         return inter_quartile_range
 
@@ -150,8 +152,8 @@ class StatisticsManager:
         :param data: The data as an array
         :return: The time at which the maximum value occurs
         """
-        index = data.index(max(data))  # Determine the index for the maximum value of V_e
-        max_time = time[index]  # Determine x_e_star from the index of V_e_max
+        index = data.index(max(data))  # Determine the index for the maximum value
+        max_time = time[index]  # Determine time from the index of the maximum
         return max_time
 
     @staticmethod
@@ -161,8 +163,8 @@ class StatisticsManager:
         :param data: The data as an array
         :return: The time at which the minimum value occurs
         """
-        index = data.index(min(data))  # Determine the index for the maximum value of V_e
-        max_time = time[index]  # Determine x_e_star from the index of V_e_max
+        index = data.index(min(data))  # Determine the index for the minimum value
+        max_time = time[index]  # Determine time from the index of the minimum
         return max_time
 
 
