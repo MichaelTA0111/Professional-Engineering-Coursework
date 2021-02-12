@@ -1,3 +1,7 @@
+//
+// Created by MichaelTA on 09/02/2021.
+//
+
 #ifndef MBED_SENSOR_H
 #define MBED_SENSOR_H
 
@@ -5,6 +9,7 @@
 
 /**
  * Abstract class for sensors to inherit from
+ * @author - MichaelTA
  */
 class Sensor {
     public:
