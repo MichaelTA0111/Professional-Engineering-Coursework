@@ -18,9 +18,9 @@ class Exporter:
         :param unix: Boolean to save the time as a unix timestamp or a date and time
         """
         if unix:
-            headings = 'timestamp,' + headings.replace(' ', '')
+            headings = 'timestamp,' + headings.replace(', ', ',')
         else:
-            headings = 'date_and_time,' + headings.replace(' ', '')
+            headings = 'date_and_time,' + headings.replace(', ', ',')
             for i in range(len(data)):
                 data[i] = list(data[i])
                 data[i][0] = utds(data[i][0])
