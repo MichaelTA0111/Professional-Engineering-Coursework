@@ -130,8 +130,8 @@ def db_read(time_range, headings, db_file_path=r"data.db", plot_graph=True, grap
     :param time_range: The start and end times to be queried as unix timestamps
     :param headings: The column headings which are being queried
     :param db_file_path: The file path of the database to be queried
-    :param graph_file_path: The file path of the database to be queried
     :param plot_graph: Boolean to determine if the results should be plotted
+    :param graph_file_path: The file path to save the graph to
     :return: The raw data and the formatted time with corresponding measurements
     """
     db = DatabaseManager(db_file_path)  # Open a database

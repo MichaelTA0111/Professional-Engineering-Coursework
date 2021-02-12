@@ -15,15 +15,16 @@ if __name__ == '__main__':
     headings = ['temperature',
                 'carbon_monoxide, nitric_oxide, nitrogen_dioxide, sulphur_dioxide',
                 'carbon_monoxide, sulphur_dioxide']
-    file_paths = ['test1.csv', 'test2.csv', 'test3.csv']
+    graph_file_paths = ['test1.svg', 'test2.svg', 'test3.svg']
+    csv_file_paths = ['test1.csv', 'test2.csv', 'test3.csv']
     stats = []
 
     for i in range(len(times)):
-        raw, time, data = db_read(times[i], headings[i], plot_graph=True)
+        raw, time, data = db_read(times[i], headings[i], plot_graph=True, graph_file_path=graph_file_paths[i])
         if i == 1:
-            Ex.export(headings[i], raw, file_paths[i], unix=True)
+            Ex.export(headings[i], raw, csv_file_paths[i], unix=True)
         else:
-            Ex.export(headings[i], raw, file_paths[i], unix=False)
+            Ex.export(headings[i], raw, csv_file_paths[i], unix=False)
         stats.append([])
         for j in range(len(data)):
             stats[i].append(Sm(data[j], time))
