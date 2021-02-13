@@ -4,6 +4,9 @@
 
 #include "DataPackage.h"
 
+
+using namespace std::chrono_literals;
+
 DataPackage::DataPackage(std::chrono::microseconds runtime, double temperature, double carbonMonoxide,
                          double nitricOxide, double nitrogenDioxide, double sulphurDioxide) : creationTime(runtime),
                                                                                               temperature(temperature),

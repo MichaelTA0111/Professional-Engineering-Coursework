@@ -8,8 +8,6 @@
 
 #include <chrono>
 
-using namespace std::chrono_literals;
-
 /**
  * A collection of data recorded by the sensor to be sent over the network.
  * @author - David Lim
