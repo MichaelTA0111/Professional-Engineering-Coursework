@@ -8,6 +8,8 @@
 
 #include <chrono>
 
+using namespace std::chrono_literals;
+
 /**
  * A collection of data recorded by the sensor to be sent over the network.
  * @author - David Lim
@@ -25,6 +27,11 @@ public:
      */
     DataPackage(std::chrono::microseconds runtime, double temperature, double carbonMonoxide, double nitricOxide,
                 double nitrogenDioxide, double sulphurDioxide);
+
+    /**
+     * Default constructor for the data package.
+     */
+    DataPackage();
 
     /**
      * Calculate and return the time since the data package was created.
