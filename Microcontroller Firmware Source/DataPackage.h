@@ -2,15 +2,17 @@
 // Created by drlim on 12/02/2021.
 //
 
-#ifndef PROFFESIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
-#define PROFFESIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
+#ifndef PROFESSIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
+#define PROFESSIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
 
 
 #include <chrono>
+#include <vector>
+#include <sstream>
 
 /**
  * A collection of data recorded by the sensor to be sent over the network.
- * @author - David Lim
+ * @authors - David Lim, MichaelTA
  */
 class DataPackage {
 public:
@@ -68,6 +70,14 @@ public:
      */
     double getSulphurDioxide() const;
 
+    /**
+     * Static method to parse a vector of data packages into a JSON object
+     * @param packages - A vector of data packages
+     * @param runtime - The time the program has been running for as a std::chrono::duration
+     * @return - A JSON object as a string
+     */
+    static std::string jsonParser(const std::vector<DataPackage>& packages, std::chrono::microseconds runtime);
+
 private:
     std::chrono::microseconds creationTime;
     double temperature;
@@ -78,4 +88,4 @@ private:
 };
 
 
-#endif //PROFFESIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
+#endif //PROFESSIONAL_ENGINEERING_COURSEWORK_DATAPACKAGE_H
