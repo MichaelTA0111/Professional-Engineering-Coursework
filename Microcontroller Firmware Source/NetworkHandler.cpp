@@ -124,14 +124,16 @@ void NetworkHandler::disconnect() {
 }
 
 void NetworkHandler::setStaticIpEnabled(bool staticIpEnabled) {
-    if (staticIpEnabled != this->staticIpEnabled) {
-        if (staticIpEnabled) {
-            setIpAddress();
-        } else{
-            ethernet.set_dhcp(true);
+    if (ethernet.get_connection_status() == NSAPI_STATUS_DISCONNECTED) {
+        if (staticIpEnabled != this->staticIpEnabled) {
+            if (staticIpEnabled) {
+                setIpAddress();
+            } else {
+                ethernet.set_dhcp(true);
+            }
         }
+        NetworkHandler::staticIpEnabled = staticIpEnabled;
     }
-    NetworkHandler::staticIpEnabled = staticIpEnabled;
 }
 
 bool NetworkHandler::isConnectionEstablished() const {

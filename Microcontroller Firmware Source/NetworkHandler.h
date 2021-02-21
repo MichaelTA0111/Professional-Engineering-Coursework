@@ -49,6 +49,10 @@ public:
      */
     void disconnect();
 
+    /**
+     * Setter for staticIpEnabled. Network interface must be disconnected otherwise does nothing.
+     * @param staticIpEnabled - The new value for staticIpEnabled as a boolean
+     */
     void setStaticIpEnabled(bool staticIpEnabled);
 
     /**
