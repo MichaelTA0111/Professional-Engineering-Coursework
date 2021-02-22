@@ -169,4 +169,5 @@ CMakeLists.txt
 # Mbed compile files
 BUILD
 .mbed
-mbed-os
+mbed-os/
+event-interval-trigger/
