@@ -85,7 +85,7 @@ private:
     std::vector<DataPackage> buffer;
 
     /**
-     * Helper method to set the IP address of the network interface.
+     * Helper method to set the IP address of the network interface. Network interface must be disconnected.
      * @return - Whether the IP address was successfully set as a boolean
      */
     bool setIpAddress();

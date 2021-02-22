@@ -30,22 +30,29 @@ bool NetworkHandler::setIpAddress() {
     SocketAddress netmask;
     bool error = false;
 
-    if (ethernet.connect() == NSAPI_ERROR_OK) {
-        if (ethernet.get_gateway(&gateway) != NSAPI_ERROR_OK) {
-            error = true;
+    if (ethernet.get_connection_status() == NSAPI_STATUS_DISCONNECTED) {
+        ethernet.connect();
+
+        if (ethernet.get_connection_status() == NSAPI_STATUS_LOCAL_UP) {
+            if (ethernet.get_gateway(&gateway) != NSAPI_ERROR_OK) {
+                error = true;
+            }
+
+            if (ethernet.get_netmask(&netmask) != NSAPI_ERROR_OK) {
+                error = true;
+            }
         }
 
-        if (ethernet.get_netmask(&netmask) != NSAPI_ERROR_OK) {
-            error = true;
+        ethernet.disconnect();
+            
+        if (!error) {
+            if (ethernet.set_network(SocketAddress(staticIp.c_str()), netmask, gateway) != NSAPI_ERROR_OK) {
+                error = true;
+            }
         }
-    }
 
-    ethernet.disconnect();
-        
-    if (!error) {
-        if (ethernet.set_network(SocketAddress(staticIp.c_str()), netmask, gateway) != NSAPI_ERROR_OK) {
-            error = true;
-        }
+    } else {
+        error = true;
     }
     
     return !error;
