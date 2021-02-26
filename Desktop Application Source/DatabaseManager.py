@@ -3,7 +3,6 @@ from sqlite3 import Error
 from TimeConverter import TimeConverter as Tc
 from Plotter import Plotter
 
-
 dtu = Tc.date_to_unix
 utd = Tc.unix_to_date
 
@@ -77,6 +76,26 @@ class DatabaseManager:
         except Error as e:
             print(e)
             return
+
+    def insert(self, data):
+        """
+        Method to insert data into database
+        :param data: The data to be inserted into the database as an array of JSON objects
+        """
+        try:
+            c = self.__conn.cursor()
+            for i in range(len(data)):
+                c.execute('''INSERT INTO data_table(timestamp, temperature, carbon_monoxide, nitric_oxide,
+                             nitrogen_dioxide, sulphur_dioxide) VALUES(?,?,?,?,?,?)''',
+                          (data[i]['timeAlive'],
+                           data[i]['temperature'],
+                           data[i]['carbonMonoxide'],
+                           data[i]['nitricOxide'],
+                           data[i]['nitrogenDioxide'],
+                           data[i]['sulphurDioxide']))
+            self.__conn.commit()
+        except Error as e:
+            print(e)
 
 
 def determine_heading_labels(headings):
@@ -154,6 +173,32 @@ def db_read(time_range, headings, db_file_path=r"data.db", plot_graph=True, grap
     db.close()  # Close the database
 
     return raw_data, formatted_time, formatted_measurements
+
+
+def db_write(data, db_file_path=r"data.db"):
+    """
+    Function to write to the database
+    :param data: The data to be written to the database
+    :param db_file_path: The file path of the database to be written to
+    """
+    try:
+        if data is not None:
+            db = DatabaseManager(db_file_path)  # Open a database
+            sql_create_projects_table = '''CREATE TABLE IF NOT EXISTS data_table (timestamp integer PRIMARY KEY,
+                                                                                  temperature real,
+                                                                                  carbon_monoxide real,
+                                                                                  nitric_oxide real,
+                                                                                  nitrogen_dioxide real,
+                                                                                  sulphur_dioxide real);'''
+            db.create_table(sql_create_projects_table)
+
+            db.insert(data)  # Insert data into the database
+
+            db.close()  # Close the database
+        else:
+            print('No data to be written!')
+    except:
+        print('Error writing to database')
 
 
 if __name__ == '__main__':
