@@ -1,3 +1,4 @@
+from socket import socket, AF_INET, SOCK_STREAM
 import json
 
 
@@ -5,6 +6,37 @@ class NetworkHandler:
     """
     Class to handle the network connection
     """
+
+    def __init__(self, port=1028, sock=None):
+        """
+        Constructor for the NetworkHandler.
+        :param port: The network port to send data over
+        :param sock: An already configured network socket
+        """
+        self.port = port
+        if sock is None:
+            self.sock = socket(
+                AF_INET, SOCK_STREAM)
+        else:
+            self.sock = sock
+
+    def connect(self, host):
+        """
+        Connect to a device on the network.
+        """
+        self.sock.connect((host, self.port))
+
+    def receive(self):
+        """
+        Receives data from the connected socket.
+        :return: The data received
+        """
+        bytes_recd = 0
+        chunk = self.sock.recv(2048)
+        if chunk == b'':
+            raise RuntimeError("socket connection broken")
+        return chunk
+
     @staticmethod
     def parse_json(string):
         """
