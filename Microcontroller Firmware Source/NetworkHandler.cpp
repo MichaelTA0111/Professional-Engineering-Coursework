@@ -13,16 +13,17 @@ NetworkHandler::NetworkHandler(bool staticIpEnabled, int port, int timeout, std:
 }
 
 void NetworkHandler::connectToNetwork() {
-    if (this->staticIpEnabled) {
-        setIpAddress();
+    if (ethernet.get_connection_status() == NSAPI_STATUS_DISCONNECTED) {
+        if (this->staticIpEnabled) {
+            setIpAddress();
+        }
+
+        ethernet.connect();
+
+        socket->open(&ethernet);
+        socket->bind(this->port);
+        socket->listen();
     }
-
-    ethernet.connect();
-
-    socket->open(&ethernet);
-//    socket->set_timeout(this->timeout);
-    socket->bind(this->port);
-    socket->listen();
 }
 
 bool NetworkHandler::setIpAddress() {
@@ -64,12 +65,12 @@ void NetworkHandler::connectToHost() {
     if (error == NSAPI_ERROR_WOULD_BLOCK) {
         newSocket->close();
         delete newSocket;
-        connectionEstablished = false;
+        hostConnectionEstablished = false;
     } else {
         socket->close();
         delete socket;
         socket = newSocket;
-        connectionEstablished = true;
+        hostConnectionEstablished = true;
     }
 }
 
@@ -143,8 +144,8 @@ void NetworkHandler::setStaticIpEnabled(bool staticIpEnabled) {
     }
 }
 
-bool NetworkHandler::isConnectionEstablished() const {
-    return connectionEstablished;
+bool NetworkHandler::isHostConnectionEstablished() const {
+    return hostConnectionEstablished;
 }
 
 bool NetworkHandler::isConnectionActive() const {

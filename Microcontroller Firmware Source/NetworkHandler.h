@@ -59,7 +59,7 @@ public:
      * Getter for connectionEstablished.
      * @return - Whether a connection has been made with the remote host as a boolean
      */
-    bool isConnectionEstablished() const;
+    bool isHostConnectionEstablished() const;
 
     /**
      * Getter for connectionActive.
@@ -75,7 +75,7 @@ public:
 
 private:
     bool staticIpEnabled;
-    bool connectionEstablished = false;
+    bool hostConnectionEstablished = false;
     bool connectionActive = false;
     const int port;
     const int timeout;
