@@ -25,7 +25,7 @@ public:
      * @param timeout - The timeout time in milliseconds for the network socket as an integer
      * @param staticIp - The static IP address to use as a std::string
      */
-    NetworkHandler(bool staticIpEnabled, int port = 1028, int timeout, std::string staticIp = "192.168.1.255");
+    NetworkHandler(bool staticIpEnabled, int port = 1028, int timeout = 25, std::string staticIp = "192.168.1.255");
 
     /**
      * Connect to the local network.
