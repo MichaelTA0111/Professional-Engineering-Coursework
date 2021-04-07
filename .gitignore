@@ -172,3 +172,4 @@ BUILD
 mbed-os/
 event-interval-trigger/
 joystick/
+mbed-bme680-spi/
