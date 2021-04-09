@@ -65,8 +65,8 @@ void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
                 updateScreen = true;
                 char newMsg[4][22] = {"Temperature:",
                                       "Humidity:",
-                                      "NO2:",
-                                      "SO2:"};
+                                      "Pressure:",
+                                      "NO2:"};
                 createBigMsg(msg, newMsg);
                 state = TRANSITION_RIGHT;
                 counter = 0;
@@ -126,8 +126,8 @@ void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
                                    "*********************"};
             char rightMsg[4][22] = {"Temperature:",
                                     "Humidity:",
-                                    "NO2:",
-                                    "SO2:"};
+                                    "Pressure:",
+                                    "NO2:"};
             createBigMsg(leftMsg, rightMsg);
             state = TRANSITION_LEFT;
             counter = 0;
