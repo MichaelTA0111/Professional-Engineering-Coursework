@@ -209,6 +209,7 @@ void Menu::displayMessage(char msg[4][22])
     oled->setTextCursor(1,24);
     oled->printf(msg[3]);
     oled->display();
+    oled->display();
 }
 
 void Menu::displayStatus(bool connected, int ip[4], int unsentPackages,
@@ -247,6 +248,7 @@ void Menu::displayStatus(bool connected, int ip[4], int unsentPackages,
         }
     }
     oled->display();
+    oled->display();
 }
 
 void Menu::displayReadings(double temp, int hum, double conc1, double conc2)
@@ -259,6 +261,7 @@ void Menu::displayReadings(double temp, int hum, double conc1, double conc2)
     oled->printf("NO2: %.2f ug/m^3", conc1);
     oled->setTextCursor(1,24);
     oled->printf("SO2: %.2f ug/m^3", conc2);
+    oled->display();
     oled->display();
 }
 
