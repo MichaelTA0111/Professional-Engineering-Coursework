@@ -126,8 +126,8 @@ void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
                                    "*********************"};
             char rightMsg[4][22] = {"Temperature:",
                                     "Humidity:",
-                                    "Pressure:",
-                                    "NO2:"};
+                                    "NO2:",
+                                    "SO2:"};
             createBigMsg(leftMsg, rightMsg);
             state = TRANSITION_LEFT;
             counter = 0;
