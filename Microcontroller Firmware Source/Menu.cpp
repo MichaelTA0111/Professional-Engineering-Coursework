@@ -251,16 +251,16 @@ void Menu::displayStatus(bool connected, int ip[4], int unsentPackages,
     oled->display();
 }
 
-void Menu::displayReadings(double temp, int hum, double conc1, double conc2)
+void Menu::displayReadings(double temperature, int humidity, double pressure, double no2)
 {
     oled->setTextCursor(1,0);
-    oled->printf("Temperature: %.2f C", temp);
+    oled->printf("Temperature: %.2f C", temperature);
     oled->setTextCursor(1,8);
-    oled->printf("Humidity: %d %%", hum);
+    oled->printf("Humidity: %d %%", humidity);
     oled->setTextCursor(1,16);
-    oled->printf("NO2: %.2f ug/m^3", conc1);
+    oled->printf("Pressure: %.2f hPa", pressure);
     oled->setTextCursor(1,24);
-    oled->printf("SO2: %.2f ug/m^3", conc2);
+    oled->printf("NO2: %.2f ug/m^3", no2);
     oled->display();
     oled->display();
 }
