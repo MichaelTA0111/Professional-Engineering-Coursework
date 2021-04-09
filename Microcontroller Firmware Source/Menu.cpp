@@ -201,13 +201,13 @@ void Menu::updateOption(Direction dir)
 void Menu::displayMessage(char msg[4][22])
 {
     oled->setTextCursor(1,0);
-    oled->printf(msg[0]);
+    oled->printf("%s", msg[0]);
     oled->setTextCursor(1,8);
-    oled->printf(msg[1]);
+    oled->printf("%s", msg[1]);
     oled->setTextCursor(1,16);
-    oled->printf(msg[2]);
+    oled->printf("%s", msg[2]);
     oled->setTextCursor(1,24);
-    oled->printf(msg[3]);
+    oled->printf("%s", msg[3]);
     oled->display();
     oled->display();
 }
