@@ -41,7 +41,7 @@ public:
     Menu(I2C &i2c, PinName resetPin);
 
     void use(Direction dir, std::chrono::milliseconds runtime, bool connected,
-             int ip[4], int unsentPackages, int timeUntilNextSend, double temp,
+             std::string ip, int unsentPackages, int timeUntilNextSend, double temp,
              int hum, double conc1, double conc2);
 
 private:
@@ -50,7 +50,7 @@ private:
 
     void displayMessage(char msg[4][22]);
 
-    void displayStatus(bool connected, int ip[4], int unsentPackages,
+    void displayStatus(bool connected, std::string ip, int unsentPackages,
                        int timeUntilNextSend);
 
     void displayReadings(double temp, int hum, double conc1, double conc2);

@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <string>
 
 
 Menu::Menu(I2C &i2c, PinName resetPin) {
@@ -15,7 +16,7 @@ Menu::Menu(I2C &i2c, PinName resetPin) {
 }
 
 void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
-               int ip[4], int unsentPackages, int timeUntilSend, double temp,
+               std::string ip, int unsentPackages, int timeUntilSend, double temp,
                int hum, double conc1, double conc2) {
     if (state == MAIN) {
         Option prevOption = option;
@@ -166,7 +167,7 @@ void Menu::displayMessage(char msg[4][22]) {
     oled->display();
 }
 
-void Menu::displayStatus(bool connected, int ip[4], int unsentPackages,
+void Menu::displayStatus(bool connected, std::string ip, int unsentPackages,
                          int timeUntilNextSend) {
     oled->setTextCursor(1, 0);
     if (connected) {
@@ -175,7 +176,7 @@ void Menu::displayStatus(bool connected, int ip[4], int unsentPackages,
         oled->printf("Connected: No");
     }
     oled->setTextCursor(1, 8);
-    oled->printf("IP: %d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
+    oled->printf("IP: %s", ip.c_str());
     if (!connected) {
         oled->setTextCursor(1, 16);
         if (unsentPackages < 1000) {
