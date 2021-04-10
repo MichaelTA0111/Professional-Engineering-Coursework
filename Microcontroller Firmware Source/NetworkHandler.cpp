@@ -109,10 +109,9 @@ std::string NetworkHandler::jsonParser(const std::vector<DataPackage> &packages,
         oss << "{";
         oss << "\"timeAlive\": " << std::to_string(timeAlive) << ", ";
         oss << "\"temperature\": " << std::to_string(package.getTemperature()) << ", ";
-        oss << "\"carbonMonoxide\": " << std::to_string(package.getCarbonMonoxide()) << ", ";
-        oss << "\"nitricOxide\": " << std::to_string(package.getNitricOxide()) << ", ";
-        oss << "\"nitrogenDioxide\": " << std::to_string(package.getNitrogenDioxide()) << ", ";
-        oss << "\"sulphurDioxide\": " << std::to_string(package.getSulphurDioxide());
+        oss << "\"humidity\": " << std::to_string(package.getHumidity()) << ", ";
+        oss << "\"pressure\": " << std::to_string(package.getPressure()) << ", ";
+        oss << "\"voc\": " << std::to_string(package.getVoc()) << ", ";
         oss << "}";
 
         // Append to the string of data packets
