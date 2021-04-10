@@ -1,7 +1,8 @@
 import sqlite3
 from sqlite3 import Error
-from TimeConverter import TimeConverter as Tc
+from time import time
 from Plotter import Plotter
+from TimeConverter import TimeConverter as Tc
 
 dtu = Tc.date_to_unix
 utd = Tc.unix_to_date
@@ -85,14 +86,17 @@ class DatabaseManager:
         try:
             c = self.__conn.cursor()
             for i in range(len(data)):
-                c.execute('''INSERT INTO data_table(timestamp, temperature, carbon_monoxide, nitric_oxide,
-                             nitrogen_dioxide, sulphur_dioxide) VALUES(?,?,?,?,?,?)''',
-                          (data[i]['timeAlive'],
+                time_alive = data[i]['timeAlive']
+                if time_alive < 0:
+                    time_alive = 0
+                unix_time = int(time() * 1000) - time_alive
+                c.execute('''INSERT INTO data_table(timestamp, temperature, humidity, pressure,
+                             voc) VALUES(?,?,?,?,?)''',
+                          (unix_time,
                            data[i]['temperature'],
-                           data[i]['carbonMonoxide'],
-                           data[i]['nitricOxide'],
-                           data[i]['nitrogenDioxide'],
-                           data[i]['sulphurDioxide']))
+                           data[i]['humidity'],
+                           data[i]['pressure'],
+                           data[i]['voc']))
             self.__conn.commit()
         except Error as e:
             print(e)
@@ -186,10 +190,9 @@ def db_write(data, db_file_path=r"data.db"):
             db = DatabaseManager(db_file_path)  # Open a database
             sql_create_projects_table = '''CREATE TABLE IF NOT EXISTS data_table (timestamp integer PRIMARY KEY,
                                                                                   temperature real,
-                                                                                  carbon_monoxide real,
-                                                                                  nitric_oxide real,
-                                                                                  nitrogen_dioxide real,
-                                                                                  sulphur_dioxide real);'''
+                                                                                  humidity real,
+                                                                                  pressure real,
+                                                                                  voc real);'''
             db.create_table(sql_create_projects_table)
 
             db.insert(data)  # Insert data into the database
@@ -197,7 +200,7 @@ def db_write(data, db_file_path=r"data.db"):
             db.close()  # Close the database
         else:
             print('No data to be written!')
-    except:
+    except Exception:
         print('Error writing to database')
 
 
