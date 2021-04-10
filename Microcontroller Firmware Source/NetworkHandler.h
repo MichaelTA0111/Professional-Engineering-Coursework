@@ -68,6 +68,12 @@ public:
     bool isConnectionActive() const;
 
     /**
+     * Getter for the ip address.
+     * @return The ip address as a string (empty if no ip address)
+     */
+    std::string getIpAddress();
+
+    /**
      * Calculate and return how many packages are to be sent.
      * @return - How many packages are to be sent as an integer.
      */

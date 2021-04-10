@@ -4,6 +4,7 @@
 
 #include "NetworkHandler.h"
 
+#include <string>
 #include <utility>
 #include <sstream>
 
@@ -149,6 +150,16 @@ bool NetworkHandler::isHostConnectionEstablished() const {
 
 bool NetworkHandler::isConnectionActive() const {
     return connectionActive;
+}
+
+std::string NetworkHandler::getIpAddress() {
+    if (ethernet.get_connection_status() == NSAPI_STATUS_DISCONNECTED) {
+        return std::string("No IP");
+    }
+
+    SocketAddress ipAddress;
+    ethernet.get_ip_address(&ipAddress);
+    return std::string(ipAddress.get_ip_address());
 }
 
 int NetworkHandler::getBufferSize() const {
