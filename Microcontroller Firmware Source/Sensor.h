@@ -9,7 +9,7 @@
 #include <vector>
 
 /**
- * Abstract class for sensors to inherit from
+ * Stores sensor data and then calculates a mean of that data
  * @author - MichaelTA
  */
 class Sensor {
@@ -23,20 +23,20 @@ class Sensor {
          * Getter for the median reading
          * @return - The median reading
          */
-        [[nodiscard]] double getMedianReading() const;
+        [[nodiscard]] double read();
 
         /**
          * Method to add a new reading to the vector of readings
          * @param reading - The reading to be appended to the vector
          */
-        virtual void newReading(double reading);
+        void newReading(double reading);
 
+    private:
         /**
-         * Method to calculate the median value from the vector of readings
+         * Private ethod to calculate the median value from the vector of readings
          */
         void calculateMedian();
 
-    private:
         /**
          * Private method to remove all readings from the vector of previous readings
          */

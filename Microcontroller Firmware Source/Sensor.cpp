@@ -8,7 +8,8 @@ Sensor::Sensor() {
     medianReading = -300;
 }
 
-double Sensor::getMedianReading() const {
+double Sensor::read() {
+    calculateMedian();
     return medianReading;
 }
 
