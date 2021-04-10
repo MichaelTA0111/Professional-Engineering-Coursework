@@ -18,13 +18,12 @@ public:
      * Constructor for the data package.
      * @param runtime - The time the program has been running for as a std::chrono::duration
      * @param temperature - The temperature read by the sensor in celsius as a double
-     * @param carbonMonoxide - The concentration of carbon monoxide read by the sensor as a double
-     * @param nitricOxide  - The concentration of nitric oxide read by the sensor as a double
-     * @param nitrogenDioxide - The concentration of nitrogen dioxide read by the sensor as a double
+     * @param humidity - The concentration of carbon monoxide read by the sensor as a double
+     * @param pressure  - The concentration of nitric oxide read by the sensor as a double
+     * @param voc - The concentration of nitrogen dioxide read by the sensor as a double
      * @param sulphurDioxide - The concentration of sulphur dioxide read by the sensor as a double
      */
-    DataPackage(std::chrono::microseconds runtime, double temperature, double carbonMonoxide, double nitricOxide,
-                double nitrogenDioxide, double sulphurDioxide);
+    DataPackage(std::chrono::microseconds runtime, double temperature, double humidity, double pressure, double voc);
 
     /**
      * Default constructor for the data package.
@@ -45,36 +44,29 @@ public:
     double getTemperature() const;
 
     /**
-     * Getter for carbon monoxide.
-     * @return - The concentration of carbon monoxide read by the sensor as a double
+     * Getter for humidity.
+     * @return - The concentration of humidity read by the sensor as a double
      */
-    double getCarbonMonoxide() const;
+    double getHumidity() const;
 
     /**
-     * Getter for nitric oxide.
-     * @return - The concentration of nitric oxide read by the sensor as a double
+     * Getter for pressure.
+     * @return - The concentration of pressure read by the sensor as a double
      */
-    double getNitricOxide() const;
+    double getPressure() const;
 
     /**
-     * Getter for nitrogen dioxide.
-     * @return - The concentration of nitrogen dioxide read by the sensor as a double
+     * Getter for voc.
+     * @return - The concentration of voc read by the sensor as a double
      */
-    double getNitrogenDioxide() const;
-
-    /**
-     * Getter for sulphur dioxide.
-     * @return - The concentration of sulphur dioxide read by the sensor as a double
-     */
-    double getSulphurDioxide() const;
+    double getVoc() const;
 
 private:
     std::chrono::microseconds creationTime;
     double temperature;
-    double carbonMonoxide;
-    double nitricOxide;
-    double nitrogenDioxide;
-    double sulphurDioxide;
+    double humidity;
+    double pressure;
+    double voc;
 };
 
 
