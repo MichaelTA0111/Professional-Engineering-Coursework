@@ -89,7 +89,7 @@ class DatabaseManager:
                 time_alive = data[i]['timeAlive']
                 if time_alive < 0:
                     time_alive = 0
-                unix_time = int(time() * 1000) - time_alive
+                unix_time = int((time() * 1000 - time_alive) / 1000)
                 c.execute('''INSERT INTO data_table(timestamp, temperature, humidity, pressure,
                              voc) VALUES(?,?,?,?,?)''',
                           (unix_time,
