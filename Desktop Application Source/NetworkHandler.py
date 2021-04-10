@@ -63,6 +63,7 @@ class NetworkHandler:
         :param string: The JSON string which will be received from the Mbed
         :return: A list of JSON substrings
         """
+        string = str(string)
         string_list = []
         while True:
             try:
