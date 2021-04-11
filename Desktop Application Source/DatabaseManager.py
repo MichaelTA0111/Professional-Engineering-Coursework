@@ -160,10 +160,9 @@ def db_read(time_range, headings, db_file_path=r"data.db", plot_graph=True, grap
     db = DatabaseManager(db_file_path)  # Open a database
     sql_create_projects_table = '''CREATE TABLE IF NOT EXISTS data_table (timestamp integer PRIMARY KEY,
                                                                           temperature real,
-                                                                          carbon_monoxide real,
-                                                                          nitric_oxide real,
-                                                                          nitrogen_dioxide real,
-                                                                          sulphur_dioxide real);'''
+                                                                          humidity real,
+                                                                          pressure real,
+                                                                          voc real);'''
     db.create_table(sql_create_projects_table)
 
     query_headings = 'timestamp, ' + headings
