@@ -112,7 +112,7 @@ std::string NetworkHandler::jsonParser(const std::vector<DataPackage> &packages,
         oss << "\"temperature\": " << std::to_string(package.getTemperature()) << ", ";
         oss << "\"humidity\": " << std::to_string(package.getHumidity()) << ", ";
         oss << "\"pressure\": " << std::to_string(package.getPressure()) << ", ";
-        oss << "\"voc\": " << std::to_string(package.getVoc()) << ", ";
+        oss << "\"voc\": " << std::to_string(package.getVoc());
         oss << "}";
 
         // Append to the string of data packets
@@ -159,6 +159,11 @@ std::string NetworkHandler::getIpAddress() {
 
     SocketAddress ipAddress;
     ethernet.get_ip_address(&ipAddress);
+
+    if(ipAddress.get_ip_address()[0] == '\0') {
+        return std::string("No IP");
+    }
+    
     return std::string(ipAddress.get_ip_address());
 }
 
