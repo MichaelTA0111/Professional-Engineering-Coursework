@@ -25,20 +25,20 @@ class ConfigManager:
         self.__db_file_path = "data.db"
         self.__ip_address = ""
 
-        key_error_raised = False
+        error_raised = False
 
         try:
             self.db_file_path = config['DEFAULT']['db_file_path']
             raise KeyError
         except (KeyError, TypeError, ValueError):
-            key_error_raised = True
+            error_raised = True
 
         try:
             self.ip_address = config['DEFAULT']['ip_address']
         except (KeyError, TypeError, ValueError):
-            key_error_raised = True
+            error_raised = True
 
-        if key_error_raised:
+        if error_raised:
             self.__update_configuration_file()
 
     def __update_configuration_file(self):
@@ -68,17 +68,18 @@ class ConfigManager:
         :param db_file_path: The file path the database as a string
         """
         if not isinstance(db_file_path, str):
-            raise TypeError
-
-        if db_file_path.count('.db') != 1:
-            raise ValueError
+            raise TypeError('db_file_path must be a string')
 
         if not db_file_path.endswith('.db'):
-            raise ValueError
+            raise ValueError("db_file_path must end with substring '.db'")
+
+        if db_file_path.count('.db') != 1:
+            raise ValueError("db_file_path must can only contain substring '.db' once")
 
         invalid_characters = ['<', '>', ':', '"', '/', '|', '?', '*']
         if [character for character in invalid_characters if (character in db_file_path)]:
-            raise ValueError
+            raise ValueError('db_file_path cannot contain any of the following invalid characters: <, >, :, ", /, |, '
+                             '?, *')
 
         self.__db_file_path = db_file_path
         self.__update_configuration_file()
@@ -101,24 +102,23 @@ class ConfigManager:
         :param ip_address: The ip address of the microcontroller as a string
         """
         if not isinstance(ip_address, str):
-            raise TypeError
+            raise TypeError('ip_address must be a string')
 
         if ip_address.count('.') != 3:
-            raise ValueError
+            raise ValueError('ip_address must have 3 decimal points')
 
         if ip_address.startswith('.'):
-            raise ValueError
+            raise ValueError('ip_address cannot start with a decimal point')
 
         if ip_address.endswith('.'):
-            raise ValueError
+            raise ValueError('ip_address cannot end with a decimal point')
 
-        invalid_characters = ['..', '...']
-        if [character for character in invalid_characters if (character in ip_address)]:
-            raise ValueError
+        if '..' in ip_address:
+            raise ValueError('ip_address cannot contain two or more decimal places next to each other')
 
         for character in ip_address:
             if not character.isdigit() and character != '.':
-                raise ValueError
+                raise ValueError('ip_address must only contain numbers and decimal points')
 
         self.__ip_address = ip_address
         self.__update_configuration_file()
