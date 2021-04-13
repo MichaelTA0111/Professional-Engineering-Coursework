@@ -88,7 +88,7 @@ private:
      * @param pres - The pressure reading (hPa)
      * @param voc - The resistance in the sensor based on the concectration of VOCs (kOhm)
      */
-    void displayReadings(double temp, int hum, double pres, double voc);
+    void displayReadings(double temperature, int humidity, double pressure, double voc);
 
     /**
      * Helper method to create a large message for the transition screen
