@@ -24,4 +24,5 @@ Direction Joystick::direction_pressed(std::chrono::milliseconds runtime)
     if (down_button.isPressed(y_pin.read()>high_limit_y, runtime)) {
         return down;
     }
+    return none;
 }
