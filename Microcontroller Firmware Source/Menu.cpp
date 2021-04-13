@@ -4,10 +4,6 @@
 
 Menu::Menu(I2C &i2c, PinName resetPin) {
     oled = new Adafruit_SSD1306_I2c(i2c, resetPin);
-    // unsigned char *font = (unsigned char*)ExtraSmall6x8;
-    // oled->set_monospace(true);
-    // oled->set_font(font);
-    // oled->cls();
 
     state = MAIN;
     option = FIRST;
