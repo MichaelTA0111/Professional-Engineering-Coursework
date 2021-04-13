@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+from typing import Optional
 
 
 class ConfigManager:
@@ -54,7 +55,7 @@ class ConfigManager:
         configfile.close()
 
     @property
-    def db_file_path(self):
+    def db_file_path(self) -> str:
         """
         Getter for db_file_path
         :return: The file path the database as a string
@@ -85,7 +86,7 @@ class ConfigManager:
         self.__update_configuration_file()
 
     @property
-    def ip_address(self):
+    def ip_address(self) -> Optional[str]:
         """
         Getter for the ip_address
         :return: The ip address of the microcontroller ss a string (None if no IP has been set yet)
