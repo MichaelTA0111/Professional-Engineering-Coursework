@@ -13,7 +13,7 @@ Menu::Menu(I2C &i2c, PinName resetPin) {
 
 void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
                std::string ip, int unsentPackages, int timeUntilSend, double temp,
-               int hum, double conc1, double conc2) {
+               int hum, double pres, double voc) {
     if (state == MAIN) {
         Option prevOption = option;
         updateOption(dir);
@@ -90,7 +90,7 @@ void Menu::use(Direction dir, std::chrono::milliseconds runtime, bool connected,
         }
 
         if (updateScreen) {
-            displayReadings(temp, hum, conc1, conc2);
+            displayReadings(temp, hum, pres, voc);
             updateScreen = false;
         }
 
@@ -163,8 +163,7 @@ void Menu::displayMessage(char msg[4][22]) {
     oled->display();
 }
 
-void Menu::displayStatus(bool connected, std::string ip, int unsentPackages,
-                         int timeUntilNextSend) {
+void Menu::displayStatus(bool connected, std::string ip, int unsentPackages, int timeUntilNextSend) {
     oled->setTextCursor(1, 0);
     if (connected) {
         oled->printf("Connected: Yes");
@@ -191,7 +190,7 @@ void Menu::displayStatus(bool connected, std::string ip, int unsentPackages,
     oled->display();
 }
 
-void Menu::displayReadings(double temperature, int humidity, double pressure, double no2) {
+void Menu::displayReadings(double temperature, int humidity, double pressure, double voc) {
     oled->setTextCursor(1, 0);
     oled->printf("Temperature: %.2f C", temperature);
     oled->setTextCursor(1, 8);
@@ -199,7 +198,7 @@ void Menu::displayReadings(double temperature, int humidity, double pressure, do
     oled->setTextCursor(1, 16);
     oled->printf("Pressure: %.2f hPa", pressure);
     oled->setTextCursor(1, 24);
-    oled->printf("NO2: %.2f ug/m^3", no2);
+    oled->printf("VOC: %.2f ug/m^3", voc);
     oled->display();
     oled->display();
 }
