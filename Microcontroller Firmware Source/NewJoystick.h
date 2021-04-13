@@ -9,7 +9,9 @@
 #include "Button.h"
 #include <chrono>
 
-enum Direction { none = 0, left = 1, right = 2, up = 3, down = 4 };
+enum Direction {
+    none = 0, left = 1, right = 2, up = 3, down = 4
+};
 
 class Joystick {
 public:

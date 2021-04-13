@@ -12,16 +12,16 @@ Joystick::Joystick(const PinName& x_pin, const PinName& y_pin, std::chrono::mill
 
 Direction Joystick::direction_pressed(std::chrono::milliseconds runtime)
 {
-    if (left_button.isPressed(x_pin.read() < low_limit_x, runtime)) {
+    if (left_button.isPressed(x_pin.read()<low_limit_x, runtime)) {
         return left;
     }
-    if (right_button.isPressed(x_pin.read() > high_limit_x, runtime)) {
+    if (right_button.isPressed(x_pin.read()>high_limit_x, runtime)) {
         return right;
     }
-    if (up_button.isPressed(y_pin.read() < low_limit_y, runtime)) {
+    if (up_button.isPressed(y_pin.read()<low_limit_y, runtime)) {
         return up;
     }
-    if (down_button.isPressed(y_pin.read() > high_limit_y, runtime)) {
+    if (down_button.isPressed(y_pin.read()>high_limit_y, runtime)) {
         return down;
     }
 }
