@@ -4,7 +4,7 @@
 
 #include "NewJoystick.h"
 
-Joystick::Joystick(const PinName& x_pin, const PinName& y_pin, std::chrono::milliseconds debounce_delay,
+Joystick::Joystick(std::chrono::milliseconds debounce_delay, const PinName& x_pin, const PinName& y_pin,
         float low_limit_x, float high_limit_x, float low_limit_y, float high_limit_y)
         :x_pin(x_pin), y_pin(y_pin), left_button(debounce_delay), right_button(debounce_delay),
          up_button(debounce_delay), down_button(debounce_delay), low_limit_x(low_limit_x), high_limit_x(high_limit_x),

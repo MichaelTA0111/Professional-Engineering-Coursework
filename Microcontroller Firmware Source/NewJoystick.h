@@ -15,8 +15,8 @@ enum Direction {
 
 class Joystick {
 public:
-    Joystick(const PinName& x_pin, const PinName& y_pin, std::chrono::milliseconds debounce_delay,
-            float low_limit_x, float high_limit_x, float low_limit_y, float high_limit_y);
+    Joystick(std::chrono::milliseconds debounce_delay, const PinName& x_pin, const PinName& y_pin, float low_limit_x,
+            float high_limit_x, float low_limit_y, float high_limit_y);
 
     Direction direction_pressed(std::chrono::milliseconds runtime);
 
