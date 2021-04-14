@@ -42,6 +42,27 @@ def button2_clicked():
     connection.close()
 
 
+def graph_init(self, graph_data, ylabel, xlabel, title, tab):
+    """
+    Method to create the MatPlotLib graph and populate it with relevant data.
+    :param self:
+    :param graph_data: the time and temperature/humidity/pressure/VOC
+    :param ylabel:
+    :param xlabel:
+    :param title:
+    :param tab: which tab of the GUI to be included within
+    :return:
+    """
+    graph = MplCanvas(self, width=5, height=4, dpi=100)
+    graph.axes.plot(graph_data[1], graph_data[2][0])
+    graph.axes.grid()
+    # labels and title
+    graph.axes.set_ylabel(ylabel)
+    graph.axes.set_xlabel(xlabel)
+    graph.axes.set_title(title)
+    tab.layout.addWidget(graph)
+
+
 class MplCanvas(FigureCanvasQTAgg):
     # class that creates a blank graph for data to be displayed in
     def __init__(self, parent=None, width=5, height=4, dpi=100):
@@ -140,12 +161,12 @@ class MyTableWidget(QWidget):
         self.tab5.layout = QVBoxLayout(self)
         self.tab5.setLayout(self.tab5.layout)
 
-        temp = MplCanvas(self, width=5, height=4, dpi=100)
+        # temp = MplCanvas(self, width=5, height=4, dpi=100)
         humid = MplCanvas(self, width=5, height=4, dpi=100)
         press = MplCanvas(self, width=5, height=4, dpi=100)
         voc = MplCanvas(self, width=5, height=4, dpi=100)
 
-        temp.axes.grid()
+        # temp.axes.grid()
         humid.axes.grid()
         press.axes.grid()
         voc.axes.grid()
@@ -156,45 +177,27 @@ class MyTableWidget(QWidget):
         (Address this in the meeting as well)
         """
         for i in range(4):
-            print(i)
             graph_data = db_read(times, headings[i], plot_graph=False)
+            labels = determine_heading_labels(headings[i])  # Determine the labels to be used (if key was necessary)
 
-            print(graph_data[1])
-            print(graph_data[2][0])
-
-            labels = determine_heading_labels(headings[i])  # Determine the labels to be used
             if i == 0:
-                temp.axes.plot(graph_data[1], graph_data[2][0])
-                # labels and title
-                temp.axes.set_ylabel("Temperature (\N{DEGREE SIGN}C)")
-                temp.axes.set_xlabel("Date and Time [D H:M]")
-                temp.axes.set_title("Air Temperature Recorded by the System.")
+                graph_init(self, graph_data=graph_data, xlabel="Date and Time [D H:M]", tab=self.tab2,
+                           ylabel="Temperature (\N{DEGREE SIGN}C)", title="Air Temperature Recorded by the System.")
             elif i == 1:
-                humid.axes.plot(graph_data[1], graph_data[2][0])
-                # labels, key and title
-                humid.axes.set_ylabel("Humidity (%)")
-                humid.axes.set_xlabel("Date and Time [D H:M]")
-                humid.axes.set_title("Air Humidity Recorded by the System.")
+                graph_init(self, graph_data=graph_data, xlabel="Date and Time [D H:M]", tab=self.tab3,
+                           ylabel="Humidity (%)", title="Air Humidity Recorded by the System.")
                 # humid.axes.legend(labels)
             elif i == 2:
-                press.axes.plot(graph_data[1], graph_data[2][0])
-                # labels, key and title
-                press.axes.set_ylabel("Pressure (Pa)")
-                press.axes.set_xlabel("Date and Time [D H:M]")
-                press.axes.set_title("Air Pressure Detected by the System.")
-                # press.axes.legend(labels)
+                graph_init(self, graph_data=graph_data, xlabel="Date and Time [D H:M]", tab=self.tab4,
+                           ylabel="Pressure (Pa)", title="Air Pressure Detected by the System.")
             else:
-                voc.axes.plot(graph_data[1], graph_data[2][0])
-                # labels, key and title
-                voc.axes.set_ylabel("VOC ()")
-                voc.axes.set_xlabel("Date and Time [D H:M]")
-                voc.axes.set_title("Volatile Organic Compounds Detected by the System.")
-                # voc.axes.legend(labels)
+                graph_init(self, graph_data=graph_data, xlabel="Date and Time [D H:M]", tab=self.tab5,
+                           ylabel="VOC ()", title="Volatile Organic Compounds Detected by the System.")
 
-        self.tab2.layout.addWidget(temp)
-        self.tab3.layout.addWidget(humid)
-        self.tab4.layout.addWidget(press)
-        self.tab5.layout.addWidget(voc)
+        # self.tab2.layout.addWidget(temp)
+        # self.tab3.layout.addWidget(humid)
+        # self.tab4.layout.addWidget(press)
+        # self.tab5.layout.addWidget(voc)
 
         # Add the tabs to the GUI
         self.layout.addWidget(self.tabs)
@@ -204,14 +207,6 @@ class MyTableWidget(QWidget):
         print("\n")
         for currentQTableWidgetItem in self.tableWidget.selectedItems():
             print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
-
-    def graph_init(self, graph, graph_data, ylabel, xlabel, title):
-        graph = MplCanvas(self, width=5, height=4, dpi=100)
-        graph.axes.plot(graph_data[1], graph_data[2][0])
-        # labels and title
-        graph.axes.set_ylabel(ylabel)
-        graph.axes.set_xlabel(xlabel)
-        graph.axes.set_title(title)
 
 
 if __name__ == '__main__':
