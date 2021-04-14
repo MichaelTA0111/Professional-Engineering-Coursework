@@ -118,13 +118,11 @@ class MyTableWidget(QWidget):
                               "<br><a href='https://en.wikipedia.org/wiki/Nitric_oxide'>Nitric Oxide Wiki</a>, "
                               "<br><a href='https://en.wikipedia.org/wiki/Nitrogen_dioxide'>Nitrogen Dioxide Wiki</a>,"
                               "<br><a href='https://en.wikipedia.org/wiki/Sulphur_dioxide'>Sulphur Dioxide Wiki</a>.")
-        self.tab1.layout.addWidget(self.descript)
+        self.tab1.layout.addWidget(self.descript, alignment=QtCore.Qt.AlignTop)
         self.descript.setOpenExternalLinks(True)
 
-        self.descript.setAlignment(QtCore.Qt.AlignTop)
-
-        self.tab1.layout.addWidget(self.pushButton1, alignment=QtCore.Qt.AlignCenter)
-        self.tab1.layout.addWidget(self.pushButton2, alignment=QtCore.Qt.AlignCenter)
+        self.tab1.layout.addWidget(self.pushButton1, alignment=QtCore.Qt.AlignHCenter)
+        self.tab1.layout.addWidget(self.pushButton2, alignment=QtCore.Qt.AlignHCenter)
         self.tab1.setLayout(self.tab1.layout)
         self.pushButton1.clicked.connect(button1_clicked)
         self.pushButton2.clicked.connect(button2_clicked)
@@ -146,6 +144,11 @@ class MyTableWidget(QWidget):
         humid = MplCanvas(self, width=5, height=4, dpi=100)
         press = MplCanvas(self, width=5, height=4, dpi=100)
         voc = MplCanvas(self, width=5, height=4, dpi=100)
+
+        temp.axes.grid()
+        humid.axes.grid()
+        press.axes.grid()
+        voc.axes.grid()
 
         """
         To add graphs the data must be retrieved from the db, to do this we use db_read from
@@ -201,6 +204,14 @@ class MyTableWidget(QWidget):
         print("\n")
         for currentQTableWidgetItem in self.tableWidget.selectedItems():
             print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
+
+    def graph_init(self, graph, graph_data, ylabel, xlabel, title):
+        graph = MplCanvas(self, width=5, height=4, dpi=100)
+        graph.axes.plot(graph_data[1], graph_data[2][0])
+        # labels and title
+        graph.axes.set_ylabel(ylabel)
+        graph.axes.set_xlabel(xlabel)
+        graph.axes.set_title(title)
 
 
 if __name__ == '__main__':
