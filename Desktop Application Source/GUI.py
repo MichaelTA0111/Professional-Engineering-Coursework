@@ -157,12 +157,16 @@ class MyTableWidget(QWidget):
         # Create and add text then add buttons
         descript_contents = ("<br>"
                              "This program is used to monitor the temperature, humidity, pressure and the volatile "
-                             "organic compounds within the immediate vicinity of the monitoring system. For more "
-                             "information on these features and their impact on the environment, click the links below:"
-                             "<br><a href='https://en.wikipedia.org/wiki/Carbon_monoxide'>Carbon Monoxide Wiki</a>, "
-                             "<br><a href='https://en.wikipedia.org/wiki/Nitric_oxide'>Nitric Oxide Wiki</a>, "
-                             "<br><a href='https://en.wikipedia.org/wiki/Nitrogen_dioxide'>Nitrogen Dioxide Wiki</a>,"
-                             "<br><a href='https://en.wikipedia.org/wiki/Sulphur_dioxide'>Sulphur Dioxide Wiki</a>.")
+                             "organic compounds within the immediate vicinity of the monitoring system. The most common"
+                             " volatile organic compounds are <br>biogenic, largely emitted by plants. However, these "
+                             "chemicals can be dangerous For more information on these features and their impact on the"
+                             " environment, click the links below:"
+                             "<br><a href='https://en.wikipedia.org/wiki/Temperature'>Temperature Wiki</a>, "
+                             "<br><a href='https://en.wikipedia.org/wiki/Humidity'>Humidity Wiki</a>, "
+                             "<br><a href='https://en.wikipedia.org/wiki/Atmospheric_pressure'>Atmospheric Pressure "
+                             "Wiki</a>,"
+                             "<br><a href='https://en.wikipedia.org/wiki/Volatile_organic_compound'>Volatile Organic "
+                             "Compounds Wiki</a>.")
         descript = text_create(tab1, descript_contents)
         descript.setOpenExternalLinks(True)
 
@@ -276,7 +280,7 @@ class MyTableWidget(QWidget):
         # or: 1618095260, 1618101201
         print("test")
         # time_range = [(textbox1_value), (textbox2_value)]
-        time_range = [1618095260, 1618101201]
+        time_range = [1618099200, 1618185600]
         print(time_range)
         for i in range(4):
             print(i)
