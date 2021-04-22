@@ -1,8 +1,18 @@
-# Professional-Engineering-Coursework
-Professional Engineering Coursework
+# Air Pollution Monitoring System
+This is a repository for a free and open source air pollution monitoring system.
 
-## [Meeting Attendance Tracker](https://docs.google.com/spreadsheets/d/1NAkugcr3ek_vwd7HyQm--RTDRGX0rNLopGgaFsVui4M/edit?usp=sharing "Attendance Tracker")
+## Documentation
+The documentation for this project is available in this repository as "APMS Documentation.pdf".
 
-## [Plan Document](https://docs.google.com/document/d/1dG1bY9zMaWvVMWU6kalnjmRHff1fRhkYnF0y4JLto3w/edit# "Plan Document")
-
-## [Report](https://www.overleaf.com/3944416254nwcnvnggqgfk "Report")
+## Components
+The system uses the following electronic components:
+* Mbed NXP LPC1768
+* Adafruit Monochrome 0.91” 128x32 I2C OLED Display
+* RJ45 8-pin Connector
+* SparkFun RJ45 Breakout
+* RJ45 CAT6 Cable 5 m
+* Adafruit BME680
+* Thumb Joystick
+* Thumb Joystick Breakout Board
+* 5W Plug Adapter 5V DC
+* DC Barrel Power Jack/Connector
